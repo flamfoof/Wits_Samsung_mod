@@ -37,6 +37,11 @@
     console.log('onload!!!');
     var CONNECTION_WAIT_TIME = 500;
     iframeElem = document.getElementById('contentHTML');
+    iframeElem.addEventListener( "load", function(e) {
+        // console.log("more loaded fries");
+        iframeElem.contentWindow.tizen = window.tizen;
+    });
+    console.log("LOADED FRIES");
     loadingElem = document.getElementById('loading');
     connectIconElem = document.getElementById('connectIcon');
     connectMessageElem = document.getElementById('connectMessage');
@@ -190,8 +195,11 @@
     socket = io(url, options);
 
     socket.on('connect_error', function (err) {
-      alert(`Connect Error(${url}): ${err.message}`);
-      tizen.application.getCurrentApplication().exit();
+    //   alert(`Connect Error(${url}): ${err.message}`);
+    //   tizen.application.getCurrentApplication().exit();
+    
+    socket.disconnect(true);
+    socket.close();
     });
 
     socket.on('response', function (chunk) {
@@ -213,7 +221,7 @@
       socket.disconnect(true);
       socket.close();
       if (isLoadingContents) {
-        alert('Failed to load Content Application');
+        // alert('Failed to load Content Application');
         tizen.application.getCurrentApplication().exit();
       }
     });

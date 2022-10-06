@@ -9,7 +9,7 @@ const { logger } = require('../lib/logger');
 module.exports = {
     run: async option => {
         logger.log(
-            chalk.cyanBright(`Start running Wits watch mode............\n`)
+            chalk.cyanBright(`Start running Wits watch mode............nnnnig\n`)
         );
 
         await util.initTools();
@@ -17,9 +17,16 @@ module.exports = {
         const data = await userInfoHelper.getLatestWitsconfigInfo()
             .connectionInfo;
 
+            
+        data.isDebugMode=true;
+
         if (option !== undefined) {
             await supportDeviceIpOption(data, option);
         }
+
+        logger.log(
+            chalk.cyanBright("wtf bro: \n" + data.isDebugMode)
+        );
 
         const baseAppPath = userInfoHelper.getBaseAppPath(data.baseAppPath);
         const deviceInfo = await userInfoHelper.getDeviceInfo(data.deviceIp);
@@ -30,14 +37,16 @@ module.exports = {
 
         watchHelper.openSocketServer(data, deviceInfo);
         // appLaunchHelper.terminateApp(deviceName, hostAppId);
-
         try {
             data.isDebugMode
-                ? appLaunchHelper.launchDebugMode(
+                ? (logger.log(
+                    chalk.cyanBright("wtf dude: \n" + data.isDebugMode)
+                ),
+                appLaunchHelper.launchDebugMode(
                       deviceName,
                       hostAppId,
                       data.deviceIp
-                  )
+                  ))
                 : appLaunchHelper.launchApp(deviceName, hostAppId);
         } catch (e) {
             logger.log(e);
