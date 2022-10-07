@@ -32,14 +32,20 @@
   var PORT = '{{HOST_PORT}}';
   var CONNECTED = 'Connected';
   var DISCONNECTED = 'Disconnected';
+  var contentLoaded = false;
 
   window.onload = function () {
     console.log('onload!!!');
     var CONNECTION_WAIT_TIME = 500;
     iframeElem = document.getElementById('contentHTML');
     iframeElem.addEventListener( "load", function(e) {
-        // console.log("more loaded fries");
-        iframeElem.contentWindow.tizen = window.tizen;
+        if(contentLoaded && iframeElem.contentWindow.tizen == undefined)
+        {
+            console.log("more loaded fries");
+            setTimeout(function() {
+                iframeElem.contentWindow.tizen = window.tizen;
+            }, 200)
+        }
     });
     console.log("LOADED FRIES");
     loadingElem = document.getElementById('loading');
@@ -105,6 +111,7 @@
         iframeElem.onload = function () {
           iframeElem.focus();
           hideWitsContainer();
+          contentLoaded = true;
         };
       }, CONTENT_LOAD_WAIT_TIME);
     } catch (e) {
