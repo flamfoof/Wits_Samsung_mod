@@ -44,7 +44,7 @@
             console.log("more loaded fries");
             setTimeout(function() {
                 iframeElem.contentWindow.tizen = window.tizen;
-            }, 200)
+            }, 100)
         }
     });
     console.log("LOADED FRIES");
