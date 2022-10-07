@@ -123,13 +123,13 @@
   }
 
   function toggleConnectInfo(status) {
-    if (status === CONNECTED) {
-      connectIconElem.className = 'connected';
-      connectMessageElem.innerHTML = CONNECTED;
-    } else {
-      connectIconElem.className = 'disconnected';
-      connectMessageElem.innerHTML = DISCONNECTED;
-    }
+    // if (status === CONNECTED) {
+    //   connectIconElem.className = 'connected';
+    //   connectMessageElem.innerHTML = CONNECTED;
+    // } else {
+    //   connectIconElem.className = 'disconnected';
+    //   connectMessageElem.innerHTML = DISCONNECTED;
+    // }
   }
 
   function runIconDimAnimation() {
